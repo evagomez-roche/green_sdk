@@ -13,11 +13,11 @@ The calculation is based on the official standard from the Green Software Founda
 
 You do not need to set up complex infrastructure. The SDK runs locally and stores data in a local SQLite database.
 
-1. Clone or copy the `roche_green_sdk` folder into the root directory of your project.
+1. Clone or copy the `green-sdk` repository into the root directory of your project.
 2. Open your terminal in that directory and install the package locally by running:
 
 ```bash
-pip install -e ./roche_green_sdk
+pip install -e .
 
 ```
 
@@ -34,7 +34,7 @@ Import `GreenLogger` in your main script and wrap the function or process you wa
 This activates **Path A**, using CodeCarbon to measure the actual physical CPU and RAM energy consumption on your local machine or container.
 
 ```python
-from roche_green import GreenLogger
+from roche_green.logger import GreenLogger
 
 # Define how many units you are processing (e.g., CSV rows, transactions)
 records_processed = 5000
@@ -57,7 +57,7 @@ with GreenLogger(
 AI inference energy consumption happens in the cloud. Because cloud providers do not expose physical GPU sensors, setting `is_ai=True` activates **Path B (The CLEER Engine)**. The SDK deterministically calculates the environmental impact locally based on token telemetry, completely removing external API bottlenecks.
 
 ```python
-from roche_green import GreenLogger
+from roche_green.logger import GreenLogger
 
 # 1. Execute your AI call (Amazon Bedrock, OpenAI, Anthropic, etc.)
 response = ai_client.generate_text(prompt="Summarize this document")
@@ -95,7 +95,7 @@ The `GreenLogger` handles both scenarios to ensure the SCI Dashboard can mathema
 **Example for Historical Data:**
 
 ```python
-from roche_green import GreenLogger
+from roche_green.logger import GreenLogger
 
 # Initialize logger for historical/batch data
 with GreenLogger(
@@ -170,11 +170,13 @@ When optimizing code between the PRE and POST phases, developers must evaluate a
 **🚨 THE GOLDEN RULE: Apples to Apples**
 To allow the Dashboard to calculate exact savings, the telemetry structure must be completely symmetrical:
 
-1.  **Exact same number of steps:** If your baseline measurement used 3 `GreenLogger` wrappers (resulting in 3 rows in the DB), your optimized measurement MUST also use 3 wrappers wrapping the exact same logic blocks.
-2.  **Exact same names:** The `step_name` parameter in your Python code must remain **100% identical** between the baseline and the optimized code (e.g., if it was `"Client_Vite_Build"`, keep it exactly like that). Do not manually add "-post" or "-optimized" in your code.
-3.  **File naming convention:**
-    *   Send your baseline file named normally (e.g., `yourproject_telemetry_pre.db`).
-    *   Send your optimized file with the word **"post"** or **"opt"** in the filename (e.g., `yourproject_telemetry_post.db`). Our central parser will automatically detect this and tag your steps as `(POST-OPTIMIZATION)`.
+1. **Exact same number of steps:** If your baseline measurement used 3 `GreenLogger` wrappers (resulting in 3 rows in the DB), your optimized measurement MUST also use 3 wrappers wrapping the exact same logic blocks.
+2. **Exact same names:** The `step_name` parameter in your Python code must remain **100% identical** between the baseline and the optimized code (e.g., if it was `"Client_Vite_Build"`, keep it exactly like that). Do not manually add "-post" or "-optimized" in your code.
+3. **File naming convention:**
+* Send your baseline file named normally (e.g., `yourproject_telemetry_pre.db`).
+* Send your optimized file with the word **"post"** or **"opt"** in the filename (e.g., `yourproject_telemetry_post.db`). Our central parser will automatically detect this and tag your steps as `(POST-OPTIMIZATION)`.
+
+
 
 *(Note: Failure to maintain the exact same `step_name` and row count will result in mismatched data, and the dashboard will reject the granular comparison).*
 
