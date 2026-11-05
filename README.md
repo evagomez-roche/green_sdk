@@ -1,4 +1,3 @@
-```markdown
 # 🌍 Roche Green SDK 2.0 - Integration Guide (Onboarding Playbook)
 
 Welcome to the **Roche Green SDK 2.0**. This tool allows you to measure the carbon footprint of your software and calculate the Software Carbon Intensity (SCI) of your code, whether it is traditional processing (CPU/RAM) or Artificial Intelligence inference (SCI for AI).
