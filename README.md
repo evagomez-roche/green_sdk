@@ -161,7 +161,17 @@ To ensure your data is accurately reflected in the global dashboard, please fill
 
 ---
 
-## 📊 6. Evaluating Optimizations (Baseline vs. Optimized)
+## 🧭 6. The Optimization Assistant (CLI)
+
+Before optimizing your code, you need to know *what* to optimize. The SDK includes a built-in CLI tool powered by the **Green Software Foundation (GSF)** pattern catalog. It provides tailored architectural recommendations based on your role (e.g., Data Engineer, AI/ML Engineer) and whether your project involves AI.
+
+Once you have installed the SDK (`pip install -e .`), you can run the assistant from any terminal within your project directory:
+
+```bash
+roche-green suggest
+
+---
+## 📊 7. Evaluating Optimizations (Baseline vs. Optimized)
 
 The ultimate goal of Green Software is not to compete against other projects, but to establish a baseline and prove internal efficiency gains. To do this, you must provide a **Baseline (PRE)** and an **Optimized (POST)** database.
 
@@ -182,7 +192,7 @@ To allow the Dashboard to calculate exact savings, the telemetry structure must 
 
 ---
 
-## 🏢 7. My Green IT Lab (Roche sHPC Infrastructure)
+## 🏢 8. My Green IT Lab (Roche sHPC Infrastructure)
 
 For internal developers running measurements on the local infrastructure (Roche sHPC), follow this workflow for provisioning and access. This ensures `Path A` metrics of the highest precision (no sensor blocking by virtualization).
 
