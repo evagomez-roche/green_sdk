@@ -169,6 +169,7 @@ Once you have installed the SDK (`pip install -e .`), you can run the assistant 
 
 ```bash
 roche-green suggest
+```
 
 ---
 ## 📊 7. Evaluating Optimizations (Baseline vs. Optimized)
