@@ -128,7 +128,7 @@ class GreenLogger:
         grid_intensity = 350.0 
         return {
             "energy_kwh": e_fac_cleer,
-            "carbon_g": (e_fac_cleer * grid_intensity) + m_cleer,
+            "carbon_g": (e_fac_cleer * grid_intensity),
             "baseline_carbon_g": (e_fac_base * grid_intensity) + m_base,
             "m_cleer_used": m_cleer
         }
