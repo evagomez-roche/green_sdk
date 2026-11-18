@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="roche_green_sdk",
-    version="2.0.1",
+    version="2.0.2",
     description="Green Software Telemetry SDK for Digital Sustainability",
     author="Green Coding Team",
     # Automatically find the 'roche_green' folder and treat it as a module
@@ -19,7 +19,9 @@ setup(
         "codecarbon>=2.3.1",
         "requests>=2.28.0",
         "pandas>=1.3.0",
-        "openpyxl>=3.0.0"
+        "openpyxl>=3.0.0",
+        # OS trust store for corporate proxies (truststore needs Python >= 3.10)
+        "truststore>=0.9.0; python_version >= '3.10'"
     ],
     python_requires=">=3.8",
     
